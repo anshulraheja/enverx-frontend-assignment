@@ -1,4 +1,7 @@
-import { ADD_TRANSACTION } from '../actionTypes/transactionActionTypes';
+import {
+  ADD_TRANSACTION,
+  GET_TRANSACTIONS,
+} from '../actionTypes/transactionActionTypes';
 
 const initialState = {
   transactions: [],
@@ -10,6 +13,11 @@ const transactionReducer = (state = initialState, action) => {
       return {
         ...state,
         transactions: [...state.transactions, action.payload],
+      };
+    case GET_TRANSACTIONS:
+      return {
+        ...state,
+        transactions: action.payload,
       };
     default:
       return state;

@@ -1,5 +1,11 @@
 import React, { useState } from 'react';
 import { useSelector } from 'react-redux';
+import {
+  Typography,
+  TextField,
+  Select,
+  MenuItem,
+} from '@mui/material';
 
 const TransactionList = () => {
   const transactions = useSelector(
@@ -43,44 +49,65 @@ const TransactionList = () => {
 
   return (
     <div>
-      <h2>Transaction List</h2>
+      <Typography variant="h2" gutterBottom>
+        Transaction List
+      </Typography>
       <div>
-        <input
-          type="text"
-          placeholder="Search by description"
+        <TextField
+          label="Search by description"
           value={searchText}
           onChange={(e) => setSearchText(e.target.value)}
+          fullWidth
         />
-        <select
+        <Select
           value={selectedCategory}
           onChange={(e) => setSelectedCategory(e.target.value)}
+          fullWidth
         >
-          <option value="">All Categories</option>
+          <MenuItem value="">All Categories</MenuItem>
           {uniqueCategories.map((category) => (
-            <option key={category} value={category}>
+            <MenuItem key={category} value={category}>
               {category}
-            </option>
+            </MenuItem>
           ))}
-        </select>
+        </Select>
       </div>
       <ul>
         {filteredTransactions.map((transaction) => (
           <li key={transaction.id}>
-            <p>Date: {transaction.date}</p>
-            <p>Description: {transaction.description}</p>
-            <p>Amount: {transaction.amount}</p>
-            <p>Category: {transaction.category}</p>
+            <Typography variant="body1">
+              Date: {transaction.date}
+            </Typography>
+            <Typography variant="body1">
+              Description: {transaction.description}
+            </Typography>
+            <Typography variant="body1">
+              Amount: {transaction.amount}
+            </Typography>
+            <Typography variant="body1">
+              Category: {transaction.category}
+            </Typography>
           </li>
         ))}
       </ul>
-      <h2>Summary</h2>
-      <p>Total Balance: {calculateTotalBalance()}</p>
-      <h3>Category Breakdown:</h3>
+      <Typography variant="h2" gutterBottom>
+        Summary
+      </Typography>
+      <Typography variant="body1">
+        Total Balance: {calculateTotalBalance()}
+      </Typography>
+      <Typography variant="h3" gutterBottom>
+        Category Breakdown:
+      </Typography>
       <ul>
         {uniqueCategories.map((category) => (
           <li key={category}>
-            <p>Category: {category}</p>
-            <p>Total: {calculateCategoryTotal(category)}</p>
+            <Typography variant="body1">
+              Category: {category}
+            </Typography>
+            <Typography variant="body1">
+              Total: {calculateCategoryTotal(category)}
+            </Typography>
           </li>
         ))}
       </ul>
